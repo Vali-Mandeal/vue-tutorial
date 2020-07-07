@@ -1,5 +1,6 @@
 <template>
   <q-page padding>
+    <input v-model="message"/>
     <h5>{{ message }}</h5>
   </q-page>
 </template>
