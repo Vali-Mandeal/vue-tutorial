@@ -9,6 +9,7 @@
       @keyup.esc="clearMessage"
       @keyup.enter="alertMessage"
       @mouseleave="alertMessage"
+      v-autofocus
     />
     <button @click="clearMessage">Clear</button>
 
@@ -55,6 +56,15 @@ export default {
   filters: {
     messageLowerCase(value){
       return value.toLowerCase();
+    }
+  },
+
+  directives: {
+    autofocus: {
+      inserted(element){
+        console.log("input inserted");
+        element.focus()
+      }
     }
   }
 };
