@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
-    <input v-model="message"/>
+    <input v-model="message" />
+    <button @click="clearMessage">Clear</button>
     <h5>{{ message }}</h5>
   </q-page>
 </template>
@@ -11,6 +12,11 @@ export default {
     return {
       message: "I love Vue.js!!!!"
     };
+  },
+  methods: {
+    clearMessage() {
+      this.message = "";
+    }
   }
 };
 </script>
