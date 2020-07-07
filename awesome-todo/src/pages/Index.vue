@@ -10,7 +10,11 @@
       @keyup.enter="alertMessage"
       @mouseleave="alertMessage"
       v-autofocus
+      v-bind:class="{ 'error' : message.length > 22 }"
     />
+
+    <div>{{ message.length }}</div>
+
     <button @click="clearMessage">Clear</button>
 
     <h5 v-if="message.length" class="border-grey">
@@ -54,16 +58,16 @@ export default {
   },
 
   filters: {
-    messageLowerCase(value){
+    messageLowerCase(value) {
       return value.toLowerCase();
     }
   },
 
   directives: {
     autofocus: {
-      inserted(element){
+      inserted(element) {
         console.log("input inserted");
-        element.focus()
+        element.focus();
       }
     }
   }
@@ -73,5 +77,13 @@ export default {
 <style>
 .border-grey {
   border: 1px solid grey;
+}
+.input,
+button {
+  font-size: 23px;
+}
+.error {
+  color: red;
+  background: pink;
 }
 </style>
