@@ -1,6 +1,10 @@
 <template>
   <q-page padding>
-    <input v-model="message" />
+    <input v-model="message" 
+    @keyup.esc="clearMessage" 
+    @keyup.enter="alertMessage"
+    @mouseleave="alertMessage"
+    />
     <button @click="clearMessage">Clear</button>
     <h5>{{ message }}</h5>
   </q-page>
@@ -16,6 +20,10 @@ export default {
   methods: {
     clearMessage() {
       this.message = "";
+    },
+
+    alertMessage() {
+      alert(this.message);
     }
   }
 };
