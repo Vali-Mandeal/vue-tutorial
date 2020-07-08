@@ -8,7 +8,7 @@
 
 <script>
 export default {
-    props: ['task', 'index']
+    props: ['task', 'index', 'deleteTask']
 }
 </script>
 
