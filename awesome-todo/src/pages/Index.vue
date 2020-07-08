@@ -1,12 +1,13 @@
 <template>
   <q-page padding>
     <ul>
-      <li v-for="(task, index) in tasks" :key="task.name">
-        <div>{{ task.name }} {{index}}</div>
-        <small>{{ task.dueDate }} @ {{ task.dueTime}} </small>
-        <button @click="deleteTask">X</button>
-
-      </li>
+      <task 
+      v-for="(task, index) in tasks"
+      :task="task"
+      :index="index"
+      :key="task.name + index"
+      ></task>
+      
     </ul>
   </q-page>
 </template>
@@ -39,6 +40,10 @@ export default {
     deleteTask(index) {
       this.tasks.splice(index, 1)
     }
+  },
+
+  components: {
+    'task' : require('components/Task.vue').default
   }
 };
 </script>
