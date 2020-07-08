@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page padding>
       <p>Todo Settings</p>
   </q-page>
 </template>
