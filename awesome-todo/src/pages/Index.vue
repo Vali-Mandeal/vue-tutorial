@@ -1,34 +1,10 @@
 <template>
   <q-page padding>
-    <button @click="counter++" style="position: absolute; right: 10px">
-      {{ counter }}
-    </button>
-
-    <input
-      v-model="message"
-      @keyup.esc="clearMessage"
-      @keyup.enter="alertMessage"
-      @mouseleave="alertMessage"
-      v-autofocus
-      v-bind:class="{ 'error' : message.length > 22 }"
-      ref="messageInput"
-    />
-
-    <div>{{ message.length }}</div>
-
-    <button @click="clearMessage">Clear</button>
-
-    <h5 v-if="message.length" class="border-grey">
-      {{ message }}
-    </h5>
-
-    <h6 v-else>No message entered</h6>
-
-    <hr />
-
-    <p>Uppercase message: {{ messageUpperCase }}</p>
-
-    <p>Lowercase message: {{ message | messageLowerCase }}</p>
+    <ul>
+      <li v-for="task in tasks" :key="task">
+        {{ task }}
+      </li>
+    </ul>
   </q-page>
 </template>
 
@@ -36,62 +12,10 @@
 export default {
   data() {
     return {
-      message: "I love Vue.js!!!!",
-      counter: 0
+      tasks: ["Go to shop", "Get bananas", "Get apples"]
     };
-  },
-
-  computed: {
-    messageUpperCase() {
-      console.log("testing if this method gets fired");
-      return this.message.toUpperCase();
-    }
-  },
-
-  methods: {
-    clearMessage() {
-      this.message = "";
-    },
-
-    alertMessage() {
-      alert(this.message);
-    }
-  },
-
-  filters: {
-    messageLowerCase(value) {
-      return value.toLowerCase();
-    }
-  },
-
-  directives: {
-    autofocus: {
-      inserted(element) {
-        console.log("input inserted");
-        element.focus();
-      }
-    }
-  },
-
-
-   mounted() {
-    console.log(this.$refs);
-    this.$refs.messageInput.className = 'bg-green'
   }
-
 };
 </script>
 
-<style>
-.border-grey {
-  border: 1px solid grey;
-}
-.input,
-button {
-  font-size: 23px;
-}
-.error {
-  color: red;
-  background: pink;
-}
-</style>
+<style></style>
