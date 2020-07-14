@@ -33,7 +33,9 @@ const actions = {
 }
 // get data from the state -> use it in the components
 const getters = {
-
+    tasks: (state) => {
+        return state.tasks
+    }
 }
 
 export default{
