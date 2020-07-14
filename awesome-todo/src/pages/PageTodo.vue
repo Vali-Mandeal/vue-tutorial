@@ -1,53 +1,31 @@
 <template>
   <q-page class="q-pa-md">
     <q-list bordered separator>
-      <q-item
-        v-for="(task, key) in tasks"
-        :key="key"
-        @click="task.completed = !task.completed"
-        clickable
-        v-ripple
-        :class="!task.completed ? 'bg-orange-1' : 'bg-green-1'"
-      >
-        <q-item-section side top>
-          <q-checkbox v-model="task.completed" />
-        </q-item-section>
 
-        <q-item-section>
-          <q-item-label :class="{ 'text-strikethrough': task.completed }">{{
-            task.name
-          }}</q-item-label>
-        </q-item-section>
-
-        <q-item-section side>
-          <div class="row">
-            <div class="column justify-center">
-              <q-icon name="event" size="18px" class="q-mr-xs" />
-            </div>
-
-            <div class="column">
-              <q-item-label caption class="row justify-end">
-                {{ task.dueDate }}
-              </q-item-label>
-              <q-item-label caption class="row justify-end">
-                <small>{{ task.dueTime }}</small>
-              </q-item-label>
-            </div>
-          </div>
-        </q-item-section>
-      </q-item>
+     <task
+     v-for="(task, key) in tasks"
+     :key="key"
+     :task="task"
+     :id = "key"
+     >
+     </task>
     </q-list>
   </q-page>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+
 export default {
   computed: {
     // tasks() {
     //   return this.$store.getters["tasks/tasks"];
     // }
     ...mapGetters("tasks", ["tasks"])
+  },
+
+  components: {
+    'task' : require('../components/Tasks/Task.vue').default
   }
 };
 </script>
