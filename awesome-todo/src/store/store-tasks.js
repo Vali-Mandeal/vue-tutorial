@@ -1,47 +1,63 @@
 const state = {
-    tasks: [
-        {
-          id: 1,
-          name: "Go to shop",
-          completed: false,
-          dueDate: "2020/07/13",
-          dueTime: "20:53"
-        },
-        {
-          id: 2,
-          name: "Get banans",
-          completed: false,
-          dueDate: "2020/07/15",
-          dueTime: "08:19"
-        },
-        {
-          id: 3,
-          name: "Get apples",
-          completed: false,
-          dueDate: "2020/07/16",
-          dueTime: "00:25"
-        }
-      ]
-}
+  // tasks: [
+  //     {
+  //       id: 1,
+  //       name: "Go to shop",
+  //       completed: false,
+  //       dueDate: "2020/07/13",
+  //       dueTime: "20:53"
+  //     },
+  //     {
+  //       id: 2,
+  //       name: "Get banans",
+  //       completed: false,
+  //       dueDate: "2020/07/15",
+  //       dueTime: "08:19"
+  //     },
+  //     {
+  //       id: 3,
+  //       name: "Get apples",
+  //       completed: false,
+  //       dueDate: "2020/07/16",
+  //       dueTime: "00:25"
+  //     }
+  //   ]
+  tasks: {
+    ID1: {
+      name: "Go to shop",
+      completed: false,
+      dueDate: "2020/07/13",
+      dueTime: "20:53"
+    },
+    ID2: {
+      name: "Get banans",
+      completed: false,
+      dueDate: "2020/07/15",
+      dueTime: "08:19"
+    },
+    ID3: {
+      name: "Get apples",
+      completed: false,
+      dueDate: "2020/07/16",
+      dueTime: "00:25"
+    }
+  }
+};
 // not async. Only mutate state instantly
-const mutations = {
-
-}
+const mutations = {};
 // async, good for data fetching
-const actions = {
-
-}
+const actions = {};
 // get data from the state -> use it in the components
 const getters = {
-    tasks: (state) => {
-        return state.tasks
-    }
-}
+  tasks: state => {
+    return state.tasks;
+  }
+};
 
-export default{
-    namespaced: true, //allowes to have multiple stores
-    state,
-    mutations,
-    actions,
-    getters
-}
+export default {
+  namespaced: true, //allowes to have multiple stores
+  state,
+  mutations,
+  actions,
+  getters
+};
