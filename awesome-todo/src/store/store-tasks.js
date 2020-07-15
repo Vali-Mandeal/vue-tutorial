@@ -23,15 +23,12 @@ const state = {
 // not async. Only mutate state instantly
 const mutations = {
   updateTask(state, payload){
-    console.log('payload (from mutation)', payload)
     Object.assign(state.tasks[payload.id], payload.updates)
   }
 };
 // async, good for data fetching
 const actions = {
   updateTask({ commit }, payload) {
-    console.log('update task action')
-    console.log('payload:', payload)
     commit('updateTask', payload)
   }
 };
