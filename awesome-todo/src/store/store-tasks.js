@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 const state = {
   tasks: {
     ID1: {
@@ -22,14 +24,20 @@ const state = {
 };
 // not async. Only mutate state instantly
 const mutations = {
-  updateTask(state, payload){
-    Object.assign(state.tasks[payload.id], payload.updates)
+  updateTask(state, payload) {
+    Object.assign(state.tasks[payload.id], payload.updates);
+  },
+  deleteTask(state, id) {
+    Vue.delete(state.tasks, id);
   }
 };
 // async, good for data fetching
 const actions = {
   updateTask({ commit }, payload) {
-    commit('updateTask', payload)
+    commit("updateTask", payload);
+  },
+  deleteTask({ commit }, id) {
+    commit("deleteTask", id);
   }
 };
 // get data from the state -> use it in the components
