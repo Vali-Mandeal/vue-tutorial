@@ -1,6 +1,9 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list bordered separator>
+    <q-list 
+    bordered 
+    separator
+    v-if="Object.keys(tasks).length">
       <task v-for="(task, key) in tasks" :key="key" :task="task" :id="key">
       </task>
     </q-list>

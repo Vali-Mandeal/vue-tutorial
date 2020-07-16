@@ -10,30 +10,48 @@
       <q-card-section>
         <div class="row q-mb-sm">
           <q-input
+            autofocus
             outlined
             v-model="taskToSubmit.name"
             label="Task name"
             class="col"
             :rules="[val => !!val || 'Field is required']"
             ref="name"
+            clearable
           />
         </div>
 
         <div class="row q-mb-sm">
           <q-input outlined v-model="taskToSubmit.dueDate" label="Due date">
             <template v-slot:append>
+              <q-icon
+                v-if="taskToSubmit.dueDate"
+                @click="clearDueDateAndTime"
+                name="close"
+                class="cursor-pointer"
+              />
               <q-icon name="event" class="cursor-pointer">
                 <q-popup-proxy>
-                  <q-date v-model="taskToSubmit.dueDate" />
+                  <q-date v-model="taskToSubmit.dueDate" clearable />
                 </q-popup-proxy>
               </q-icon>
             </template>
           </q-input>
         </div>
 
-        <div class="row q-mb-sm">
-          <q-input outlined v-model="taskToSubmit.dueTime" label="Due time">
+        <div v-if="taskToSubmit.dueDate" class="row q-mb-sm">
+          <q-input 
+          outlined 
+          v-model="taskToSubmit.dueTime" 
+          label="Due time"
+          class="col">
             <template v-slot:append>
+              <q-icon
+                v-if="taskToSubmit.dueTime"
+                @click="taskToSubmit.dueTime = ''"
+                name="close"
+                class="cursor-pointer"
+              />
               <q-icon name="access_time" class="cursor-pointer">
                 <q-popup-proxy transition-show="scale" transition-hide="scale">
                   <q-time v-model="taskToSubmit.dueTime" />
@@ -65,7 +83,7 @@ export default {
     };
   },
   methods: {
-      ...mapActions('tasks', ['addTask']),
+    ...mapActions("tasks", ["addTask"]),
     submitForm() {
       console.log("bla");
       if (!this.$refs.name.hasError) {
@@ -75,7 +93,12 @@ export default {
 
     submitTask() {
       this.addTask(this.taskToSubmit);
-      this.$emit('close');
+      this.$emit("close");
+    },
+
+    clearDueDateAndTime() {
+      this.taskToSubmit.dueDate = "";
+      this.taskToSubmit.dueTime = "";
     }
   }
 };
