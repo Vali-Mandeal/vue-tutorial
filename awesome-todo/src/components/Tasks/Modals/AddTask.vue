@@ -3,12 +3,7 @@
     <q-card-section class="row">
       <div class="text-h6">Add Task</div>
       <q-space />
-      <q-btn 
-      v-close-popup 
-      flat 
-      color="primary" 
-      dense 
-      icon="close" />
+      <q-btn v-close-popup flat color="primary" dense icon="close" />
     </q-card-section>
 
     <q-form @submit.prevent="submitForm">
@@ -50,17 +45,14 @@
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn 
-        @click="submitForm" 
-        label="Save" 
-        color="primary" />
+        <q-btn @click="submitForm" label="Save" color="primary" />
       </q-card-actions>
     </q-form>
-
   </q-card>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -73,15 +65,17 @@ export default {
     };
   },
   methods: {
+      ...mapActions('tasks', ['addTask']),
     submitForm() {
       console.log("bla");
-      if(!this.$refs.name.hasError) {
-          this.submitTask();
+      if (!this.$refs.name.hasError) {
+        this.submitTask();
       }
     },
 
-    submitTask () {
-        console.log('task')   
+    submitTask() {
+      this.addTask(this.taskToSubmit);
+      this.$emit('close');
     }
   }
 };
