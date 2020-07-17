@@ -8,23 +8,10 @@
         :name.sync="taskToSubmit.name"
         />
 
-        <div class="row q-mb-sm">
-          <q-input outlined v-model="taskToSubmit.dueDate" label="Due date">
-            <template v-slot:append>
-              <q-icon
-                v-if="taskToSubmit.dueDate"
-                @click="clearDueDateAndTime"
-                name="close"
-                class="cursor-pointer"
-              />
-              <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy>
-                  <q-date v-model="taskToSubmit.dueDate" clearable />
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
+        <modal-due-date
+        :dueDate.sync="taskToSubmit.dueDate"
+        @clear="clearDueDateAndTime"
+        />
 
         <div v-if="taskToSubmit.dueDate" class="row q-mb-sm">
           <q-input
@@ -94,7 +81,8 @@ export default {
   },
   components: {
     "modal-header": require("../Modals/Shared/ModalHeader.vue").default,
-    "modal-task-name": require("../Modals/Shared/ModalTaskName.vue").default
+    "modal-task-name": require("../Modals/Shared/ModalTaskName.vue").default,
+    "modal-due-date": require("../Modals/Shared/ModalDueDate.vue").default
   }
 };
 </script>
