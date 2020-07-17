@@ -13,13 +13,14 @@
           @clear="clearDueDateAndTime"
         />
 
-        <modal-due-time :dueTime.sync="taskToSubmit.dueTime" />
+        <modal-due-time 
+        v-if="taskToSubmit.dueDate"
+        :dueTime.sync="taskToSubmit.dueTime" 
+        />
       </q-card-section>
 
       <modal-buttons 
       />
-
-      <pre>{{ taskToSubmit }}</pre>
     </q-form>
   </q-card>
 </template>

@@ -4,7 +4,11 @@
     bordered 
     separator
     v-if="Object.keys(tasks).length">
-      <task v-for="(task, key) in tasks" :key="key" :task="task" :id="key">
+      <task 
+      v-for="(task, key) in tasks" 
+      :key="key" 
+      :task="task" 
+      :id="key">
       </task>
     </q-list>
 
@@ -29,7 +33,8 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      showAddTask: true
+      showAddTask: false,
+      showEditTask: false
     }
   },
   computed: {
@@ -41,7 +46,8 @@ export default {
 
   components: {
     task: require("../components/Tasks/Task.vue").default,
-    'add-task': require("../components/Tasks/Modals/AddTask.vue").default
+    'add-task': require("../components/Tasks/Modals/AddTask.vue").default,
+    //'edit-task': require("../components/Tasks/Modals/EditTask.vue").default
   }
 };
 </script>

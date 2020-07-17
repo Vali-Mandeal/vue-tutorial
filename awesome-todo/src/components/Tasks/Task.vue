@@ -16,9 +16,7 @@
         }}</q-item-label>
       </q-item-section>
 
-      <q-item-section 
-      v-if="task.dueDate"
-      side>
+      <q-item-section v-if="task.dueDate" side>
         <div class="row">
           <div class="column justify-center">
             <q-icon name="event" size="18px" class="q-mr-xs" />
@@ -35,19 +33,34 @@
         </div>
       </q-item-section>
 
-      <q-item-section side>
-        <q-btn
-          @click.stop="promptToDelete(id)"
-          flat
-          round
-          color="red"
-          dense
-          icon="delete"
-        />
-      </q-item-section>
+      <div class="row">
+        <q-item-section>
+          <q-btn
+            @click.stop="showEditTask = true"
+            flat
+            round
+            color="primary"
+            dense
+            icon="edit"
+          />
+        </q-item-section>
+
+        <q-item-section side>
+          <q-btn
+            @click.stop="promptToDelete(id)"
+            flat
+            round
+            color="red"
+            dense
+            icon="delete"
+          />
+        </q-item-section>
+      </div>
+
+      <q-dialog v-model="showEditTask">
+        <edit-task @close="showEditTask = false" />
+      </q-dialog>
     </q-item>
-
-
   </div>
 </template>
 
@@ -55,6 +68,11 @@
 import { mapActions } from "vuex";
 export default {
   props: ["task", "id"],
+  data() {
+    return {
+      showEditTask: false
+    };
+  },
   methods: {
     ...mapActions("tasks", ["updateTask", "deleteTask"]),
     promptToDelete(id) {
@@ -74,6 +92,10 @@ export default {
           this.deleteTask(id);
         });
     }
+  },
+
+  components: {
+    "edit-task": require("../Tasks/Modals/EditTask.vue").default,
   }
 };
 </script>
