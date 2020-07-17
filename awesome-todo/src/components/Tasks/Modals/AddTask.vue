@@ -4,18 +4,9 @@
 
     <q-form @submit.prevent="submitForm">
       <q-card-section>
-        <div class="row q-mb-sm">
-          <q-input
-            autofocus
-            outlined
-            v-model="taskToSubmit.name"
-            label="Task name"
-            class="col"
-            :rules="[val => !!val || 'Field is required']"
-            ref="name"
-            clearable
-          />
-        </div>
+        <modal-task-name
+        :name.sync="taskToSubmit.name"
+        />
 
         <div class="row q-mb-sm">
           <q-input outlined v-model="taskToSubmit.dueDate" label="Due date">
@@ -62,6 +53,8 @@
       <q-card-actions align="right">
         <q-btn @click="submitForm" label="Save" color="primary" />
       </q-card-actions>
+
+      <pre>{{taskToSubmit}}</pre>
     </q-form>
   </q-card>
 </template>
@@ -100,7 +93,8 @@ export default {
     }
   },
   components: {
-    "modal-header": require("../Modals/Shared/ModalHeader.vue").default
+    "modal-header": require("../Modals/Shared/ModalHeader.vue").default,
+    "modal-task-name": require("../Modals/Shared/ModalTaskName.vue").default
   }
 };
 </script>
