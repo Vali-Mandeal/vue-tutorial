@@ -58,7 +58,10 @@
       </div>
 
       <q-dialog v-model="showEditTask">
-        <edit-task @close="showEditTask = false" />
+        <edit-task 
+        :task="task"
+        :id="id"
+        @close="showEditTask = false" />
       </q-dialog>
     </q-item>
   </div>
