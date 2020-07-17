@@ -4,26 +4,22 @@
 
     <q-form @submit.prevent="submitForm">
       <q-card-section>
-        <modal-task-name
-        :name.sync="taskToSubmit.name"
-        />
+        <modal-task-name 
+        :name.sync="taskToSubmit.name" 
+        ref="modalTaskName" />
 
         <modal-due-date
-        :dueDate.sync="taskToSubmit.dueDate"
-        @clear="clearDueDateAndTime"
+          :dueDate.sync="taskToSubmit.dueDate"
+          @clear="clearDueDateAndTime"
         />
 
-        <modal-due-time
-        :dueTime.sync="taskToSubmit.dueTime"
-        />
-
+        <modal-due-time :dueTime.sync="taskToSubmit.dueTime" />
       </q-card-section>
 
-      <q-card-actions align="right">
-        <q-btn @click="submitForm" label="Save" color="primary" />
-      </q-card-actions>
+      <modal-buttons 
+      />
 
-      <pre>{{taskToSubmit}}</pre>
+      <pre>{{ taskToSubmit }}</pre>
     </q-form>
   </q-card>
 </template>
@@ -45,8 +41,8 @@ export default {
   methods: {
     ...mapActions("tasks", ["addTask"]),
     submitForm() {
-      console.log("bla");
-      if (!this.$refs.name.hasError) {
+      this.$refs.modalTaskName.$refs.name.validate();
+      if (!this.$refs.modalTaskName.$refs.name.hasError) {
         this.submitTask();
       }
     },
@@ -65,7 +61,8 @@ export default {
     "modal-header": require("../Modals/Shared/ModalHeader.vue").default,
     "modal-task-name": require("../Modals/Shared/ModalTaskName.vue").default,
     "modal-due-date": require("../Modals/Shared/ModalDueDate.vue").default,
-    "modal-due-time": require("../Modals/Shared/ModalDueTime.vue").default
+    "modal-due-time": require("../Modals/Shared/ModalDueTime.vue").default,
+    "modal-buttons": require("../Modals/Shared/ModalButtons.vue").default
   }
 };
 </script>
