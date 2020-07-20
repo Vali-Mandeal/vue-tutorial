@@ -3,9 +3,9 @@
     <q-list 
     bordered 
     separator
-    v-if="Object.keys(tasks).length">
+    v-if="Object.keys(tasksTodo).length">
       <task 
-      v-for="(task, key) in tasks" 
+      v-for="(task, key) in tasksTodo" 
       :key="key" 
       :task="task" 
       :id="key">
@@ -41,7 +41,7 @@ export default {
     // tasks() {
     //   return this.$store.getters["tasks/tasks"];
     // }
-    ...mapGetters("tasks", ["tasks"])
+    ...mapGetters("tasks", ["tasksTodo"])
   },
 
   components: {
