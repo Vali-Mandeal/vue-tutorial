@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <list-header>Completed</list-header>
+  <div class="q-mt-lg">
+    <list-header bgColor="bg-green-4">Completed</list-header>
 
     <q-list bordered separator v-if="Object.keys(tasksCompleted).length">
       <task

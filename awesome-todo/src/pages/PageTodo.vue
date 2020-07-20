@@ -1,12 +1,8 @@
 <template>
   <q-page class="q-pa-md">
-      <tasks-todo
-      :tasksTodo="tasksTodo"/>
+    <tasks-todo :tasksTodo="tasksTodo" />
 
-      <hr/>
-
-    <tasks-completed
-    :tasksCompleted="tasksCompleted"/>
+    <tasks-completed :tasksCompleted="tasksCompleted" />
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
@@ -43,9 +39,8 @@ export default {
 
   components: {
     "add-task": require("../components/Tasks/Modals/AddTask.vue").default,
-    "tasks-todo" : require("../components/Tasks/TasksTodo").default,
-    "tasks-completed" : require("../components/Tasks/TasksCompleted").default
-
+    "tasks-todo": require("../components/Tasks/TasksTodo").default,
+    "tasks-completed": require("../components/Tasks/TasksCompleted").default
   }
 };
 </script>
