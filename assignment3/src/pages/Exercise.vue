@@ -1,5 +1,5 @@
 <template>
-	<!--
+  <!--
 	Awesome Exercise 3 - Vuex & Forms
 
 	1) Create a Vuex Store for the food items, with the four different sections and add the food data to the appropriate section
@@ -13,59 +13,40 @@
 
 	-->
   <q-page class="q-pa-lg">
-  	<div class="row q-gutter-lg">
+    <div class="row q-gutter-lg">
+      <food
+        v-for="food in foods"
+        :key="food.id"
+        :food="food" />
 
-			<food 
-				v-for="food in foods"
-				:key="food.id"
-				:food="food" />
+      <button-add @click="showAddFoodModal = true" />
 
-	    <button-add
-	    	@click="showAddFoodModal = true" />
-
-	    <q-dialog 
-	    	v-model="showAddFoodModal">
-        <modal-add-edit-food type="add" />
+      <q-dialog v-model="showAddFoodModal">
+        <modal-add-edit-food type="add" @close="showAddFoodModal=false"/>
       </q-dialog>
-    
-  	</div>
+    </div>
   </q-page>
 </template>
 
 <script>
-	export default {
-	  data() {
-	  	return {
-	  		foods: [
-	  			{
-	  				id: 1,
-	  				name: 'Burger',
-	  				description: 'A burger is a sandwich consisting of one or more cooked patties of ground meat, usually beef, placed inside a sliced bread roll or bun.',
-	  				imageUrl: 'https://i.imgur.com/0umadnY.jpg',
-	  				rating: 4
-	  			},
-	  			{
-	  				id: 2,
-	  				name: 'Pizza',
-	  				description: 'Pizza is a savory dish of Italian origin, consisting of a usually round, flattened base of leavened wheat-based dough.',
-	  				imageUrl: 'https://i.imgur.com/b9zDbyb.jpg',
-	  				rating: 5
-	  			},
-	  			{
-	  				id: 3,
-	  				name: 'Sprouts',
-	  				description: 'The Brussels sprout is a member of the Gemmifera Group of cabbages, grown for its edible buds.',
-	  				imageUrl: 'https://i.imgur.com/RbKjUjB.jpg',
-	  				rating: 1
-	  			}
-	  		],
-	  		showAddFoodModal: false
-	  	}
-	  },
-	  components: {
-	  	'food' : require('components/Food.vue').default,
-	  	'button-add' : require('components/ButtonAdd.vue').default,
-	  	'modal-add-edit-food' : require('components/ModalAddEditFood.vue').default
-	  }
-	}
+import { mapGetters } from "vuex";
+
+export default {
+  data() {
+    return {
+      showAddFoodModal: false
+    };
+  },
+
+  computed: {
+    ...mapGetters("exerciseFoods", ["foods"])
+  },
+
+  components: {
+    food: require("components/Food.vue").default,
+    "button-add": require("components/ButtonAdd.vue").default,
+    "modal-add-edit-food": require("components/ModalAddEditFood.vue").default,
+    "modal-delete-food": require("components/ModalDeleteFood.vue").default
+  }
+};
 </script>
