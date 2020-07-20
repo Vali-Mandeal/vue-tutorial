@@ -1,28 +1,25 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list 
-    bordered 
-    separator
-    v-if="Object.keys(tasksTodo).length">
-      <task 
-      v-for="(task, key) in tasksTodo" 
-      :key="key" 
-      :task="task" 
-      :id="key">
-      </task>
-    </q-list>
+      <tasks-todo
+      :tasksTodo="tasksTodo"/>
+
+      <hr/>
+
+    <tasks-completed
+    :tasksCompleted="tasksCompleted"/>
 
     <div class="absolute-bottom text-center q-mb-lg">
-      <q-btn 
-      @click="showAddTask = true"
-      round 
-      color="primary" 
-      size="24px" 
-      icon="add" />
+      <q-btn
+        @click="showAddTask = true"
+        round
+        color="primary"
+        size="24px"
+        icon="add"
+      />
     </div>
 
     <q-dialog v-model="showAddTask">
-      <add-task @close="showAddTask = false"/>
+      <add-task @close="showAddTask = false" />
     </q-dialog>
   </q-page>
 </template>
@@ -35,19 +32,20 @@ export default {
     return {
       showAddTask: false,
       showEditTask: false
-    }
+    };
   },
   computed: {
     // tasks() {
     //   return this.$store.getters["tasks/tasks"];
     // }
-    ...mapGetters("tasks", ["tasksTodo"])
+    ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"])
   },
 
   components: {
-    task: require("../components/Tasks/Task.vue").default,
-    'add-task': require("../components/Tasks/Modals/AddTask.vue").default,
-    //'edit-task': require("../components/Tasks/Modals/EditTask.vue").default
+    "add-task": require("../components/Tasks/Modals/AddTask.vue").default,
+    "tasks-todo" : require("../components/Tasks/TasksTodo").default,
+    "tasks-completed" : require("../components/Tasks/TasksCompleted").default
+
   }
 };
 </script>
