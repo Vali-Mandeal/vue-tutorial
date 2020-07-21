@@ -1,7 +1,9 @@
 <template>
   <q-select
+    emit-value
+    map-options
     filled
-    v-model="model"
+    v-model="sortBy"
     :options="options"
     label="Sort by"
     stack-label
@@ -13,9 +15,18 @@
 export default {
   data() {
     return {
-      model: null,
+      sortBy: null,
 
-      options: ["Google", "Facebook", "Twitter", "Apple", "Oracle"],
+      options: [
+          {
+              label: "Name",
+              value: "name"
+          },
+           {
+              label: "Date",
+              value: "dueDate"
+          }
+      ],
 
       dense: false,
       denseOpts: false
