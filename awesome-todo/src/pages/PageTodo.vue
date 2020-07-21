@@ -1,17 +1,17 @@
 <template>
   <q-page class="q-pa-md">
-    <no-tasks
-    v-if="!Object.keys(tasksTodo).length"
+    <div class="row q-mb-lg">
+      <search />
+    </div>
+
+    <no-tasks v-if="!Object.keys(tasksTodo).length" />
+
+    <tasks-todo v-else :tasksTodo="tasksTodo" />
+
+    <tasks-completed
+      v-if="Object.keys(tasksCompleted).length"
+      :tasksCompleted="tasksCompleted"
     />
-
-
-    <tasks-todo 
-    v-else
-    :tasksTodo="tasksTodo" />
-
-    <tasks-completed 
-    v-if="Object.keys(tasksCompleted).length"
-    :tasksCompleted="tasksCompleted" />
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
@@ -35,7 +35,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      showAddTask: false,
+      showAddTask: false
       // showEditTask: false
     };
   },
@@ -50,13 +50,14 @@ export default {
     "add-task": require("../components/Tasks/Modals/AddTask.vue").default,
     "tasks-todo": require("../components/Tasks/TasksTodo").default,
     "tasks-completed": require("../components/Tasks/TasksCompleted").default,
-    "no-tasks": require("../components/Tasks/NoTasks").default
+    "no-tasks": require("../components/Tasks/NoTasks").default,
+    search: require("../components/Tasks/Tools/Search.vue").default
   },
 
   mounted() {
-    this.$root.$on('showAddTask', () => {
-      this.showAddTask = true
-    })
+    this.$root.$on("showAddTask", () => {
+      this.showAddTask = true;
+    });
   }
 };
 </script>
