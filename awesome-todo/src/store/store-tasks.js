@@ -55,29 +55,50 @@ const actions = {
     };
     commit("addTask", payload);
   },
-  setSearch({commit}, value) {
-    commit('setSearch', value)
+  setSearch({ commit }, value) {
+    commit("setSearch", value);
   }
 };
 // get data from the state -> use it in the components
 const getters = {
-  tasksFiltered: (state) => {
+  tasksSorted: state => {
+    let tasksSorted = {};
+    let keysOrdered = Object.keys(state.tasks);
+
+    keysOrdered.sort((a, b) => {
+      let taskAProp = state.tasks[a].name.toLowerCase();
+      let tasksBprop = state.tasks[b].name.toLowerCase();
+
+      if (taskAProp > tasksBprop) return 1;
+      else if (taskAProp < tasksBprop) return -1;
+      else return 0;
+    });
+
+    keysOrdered.forEach((key) => {
+      tasksSorted[key] = state.tasks[key]
+    })
+
+    return tasksSorted;
+  },
+
+  tasksFiltered: (state, getters) => {
+    let tasksSorted = getters.tasksSorted;
     let tasksFiltered = {};
 
     if (state.search) {
-      Object.keys(state.tasks).forEach((key) => {
-        let task = state.tasks[key]
+      Object.keys(tasksSorted).forEach(key => {
+        let task = tasksSorted[key];
         let taskNameLowerCase = task.name.toLowerCase();
         let searchLowerCase = state.search.toLowerCase();
 
         if (taskNameLowerCase.includes(searchLowerCase)) {
           tasksFiltered[key] = task;
         }
-      })
+      });
       return tasksFiltered;
     }
 
-    return state.tasks;
+    return tasksSorted;
   },
 
   tasksTodo: (state, getters) => {
