@@ -1,7 +1,8 @@
 <template>
   <q-page class="q-pa-md">
     <no-tasks
-    v-if="!Object.keys(tasksTodo).length"/>
+    v-if="!Object.keys(tasksTodo).length"
+    />
 
 
     <tasks-todo 
@@ -35,7 +36,7 @@ export default {
   data() {
     return {
       showAddTask: false,
-      showEditTask: false
+      // showEditTask: false
     };
   },
   computed: {
@@ -50,6 +51,12 @@ export default {
     "tasks-todo": require("../components/Tasks/TasksTodo").default,
     "tasks-completed": require("../components/Tasks/TasksCompleted").default,
     "no-tasks": require("../components/Tasks/NoTasks").default
+  },
+
+  mounted() {
+    this.$root.$on('showAddTask', () => {
+      this.showAddTask = true
+    })
   }
 };
 </script>

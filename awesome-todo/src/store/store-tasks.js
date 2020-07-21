@@ -21,7 +21,7 @@ const state = {
       dueDate: "2020/07/16",
       dueTime: "00:25"
     }
-  }
+  },
 };
 // not async. Only mutate state instantly
 const mutations = {
