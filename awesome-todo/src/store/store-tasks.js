@@ -22,7 +22,7 @@ const state = {
       dueTime: "00:25"
     }
   },
-  search: "Test234234"
+  search: ""
 };
 // not async. Only mutate state instantly
 const mutations = {
@@ -34,6 +34,9 @@ const mutations = {
   },
   addTask(state, payload) {
     Vue.set(state.tasks, payload.id, payload.task);
+  },
+  setSearch(state, value) {
+    state.search = value;
   }
 };
 // async, good for data fetching
@@ -51,6 +54,9 @@ const actions = {
       task: task
     };
     commit("addTask", payload);
+  },
+  setSearch({commit}, value) {
+    commit('setSearch', value)
   }
 };
 // get data from the state -> use it in the components

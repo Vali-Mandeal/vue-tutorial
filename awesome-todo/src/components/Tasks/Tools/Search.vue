@@ -14,18 +14,23 @@
 
 <script>
 import { mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   computed: {
     ...mapState("tasks", ["search"]),
     searchField: {
-        get() {
-            return this.search
-        },
-        set(value) {
-            console.log('value', value)
-        }
+      get() {
+        return this.search;
+      },
+      set(value) {
+        this.setSearch(value);
+      }
     }
+  },
+
+  methods: {
+    ...mapActions("tasks", ["setSearch"])
   }
 };
 </script>
