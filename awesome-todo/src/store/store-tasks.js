@@ -22,7 +22,8 @@ const state = {
       dueTime: "00:25"
     }
   },
-  search: ""
+  search: "",
+  sort: 'dueDate'
 };
 // not async. Only mutate state instantly
 const mutations = {
@@ -66,8 +67,8 @@ const getters = {
     let keysOrdered = Object.keys(state.tasks);
 
     keysOrdered.sort((a, b) => {
-      let taskAProp = state.tasks[a].name.toLowerCase();
-      let tasksBprop = state.tasks[b].name.toLowerCase();
+      let taskAProp = state.tasks[a][state.sort].toLowerCase();
+      let tasksBprop = state.tasks[b][state.sort].toLowerCase();
 
       if (taskAProp > tasksBprop) return 1;
       else if (taskAProp < tasksBprop) return -1;
