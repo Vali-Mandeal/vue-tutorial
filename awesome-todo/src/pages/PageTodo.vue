@@ -1,12 +1,17 @@
 <template>
   <q-page class="q-pa-md">
+
     <div class="row q-mb-lg">
       <search />
     </div>
 
-    <no-tasks v-if="!Object.keys(tasksTodo).length" />
+   <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">No search results containing {{search}} have been found.</p>
 
-    <tasks-todo v-else :tasksTodo="tasksTodo" />
+    <no-tasks v-if="!Object.keys(tasksTodo).length && !search" />
+
+    <tasks-todo
+      v-if="Object.keys(tasksTodo).length"
+      :tasksTodo="tasksTodo" />
 
     <tasks-completed
       v-if="Object.keys(tasksCompleted).length"
@@ -30,7 +35,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   data() {
@@ -43,7 +48,8 @@ export default {
     // tasks() {
     //   return this.$store.getters["tasks/tasks"];
     // }
-    ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"])
+    ...mapGetters("tasks", ["tasksTodo", "tasksCompleted"]),
+    ...mapState("tasks", ["search"])
   },
 
   components: {
