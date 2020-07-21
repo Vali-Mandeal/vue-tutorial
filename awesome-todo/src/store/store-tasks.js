@@ -22,6 +22,7 @@ const state = {
       dueTime: "00:25"
     }
   },
+  search: "Test234234"
 };
 // not async. Only mutate state instantly
 const mutations = {
