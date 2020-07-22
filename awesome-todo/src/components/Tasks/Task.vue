@@ -25,7 +25,7 @@
 
           <div class="column">
             <q-item-label caption class="row justify-end">
-              {{ task.dueDate }}
+              {{ task.dueDate | niceDate}}
             </q-item-label>
             <q-item-label caption class="row justify-end">
               <small>{{ task.dueTime }}</small>
@@ -70,6 +70,8 @@
 
 <script>
 import { mapActions } from "vuex";
+import { date } from 'quasar'
+
 export default {
   props: ["task", "id"],
   data() {
@@ -104,6 +106,12 @@ export default {
 
   components: {
     "edit-task": require("../Tasks/Modals/EditTask.vue").default,
+  },
+
+  filters: {
+    niceDate(value) {
+      return date.formatDate(value, 'D MMM')
+    }
   }
 };
 </script>
