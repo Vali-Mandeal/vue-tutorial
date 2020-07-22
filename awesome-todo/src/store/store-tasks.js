@@ -23,7 +23,7 @@ const state = {
     }
   },
   search: "",
-  sort: 'dueDate'
+  sort: 'name'
 };
 // not async. Only mutate state instantly
 const mutations = {
@@ -38,6 +38,9 @@ const mutations = {
   },
   setSearch(state, value) {
     state.search = value;
+  },
+  setSort(state, value) {
+    state.sort = value;
   }
 };
 // async, good for data fetching
@@ -58,6 +61,9 @@ const actions = {
   },
   setSearch({ commit }, value) {
     commit("setSearch", value);
+  },
+  setSort({ commit }, value) {
+    commit("setSort", value);
   }
 };
 // get data from the state -> use it in the components

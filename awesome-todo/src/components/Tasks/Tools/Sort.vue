@@ -12,25 +12,41 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   data() {
     return {
-      sortBy: null,
-
       options: [
-          {
-              label: "Name",
-              value: "name"
-          },
-           {
-              label: "Date",
-              value: "dueDate"
-          }
+        {
+          label: "Name",
+          value: "name"
+        },
+        {
+          label: "Date",
+          value: "dueDate"
+        }
       ],
 
       dense: false,
       denseOpts: false
     };
+  },
+
+  methods: {
+    ...mapActions("tasks", ["setSort"])
+  },
+
+  computed: {
+    ...mapState("tasks", ["sort"]),
+    sortBy: {
+      get() {
+        return this.sort;
+      },
+      set(value) {
+          this.setSort(value);
+      }
+    }
   }
 };
 </script>
