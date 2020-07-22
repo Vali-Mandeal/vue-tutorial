@@ -12,9 +12,9 @@
       </q-item-section>
 
       <q-item-section>
-        <q-item-label :class="{ 'text-strikethrough': task.completed }">{{
-          task.name
-        }}</q-item-label>
+        <q-item-label
+          :class="{ 'text-strikethrough': task.completed }"
+          v-html="$options.filters.searchHighlight(task.name, search)" />
       </q-item-section>
 
       <q-item-section v-if="task.dueDate" side>
@@ -25,7 +25,7 @@
 
           <div class="column">
             <q-item-label caption class="row justify-end">
-              {{ task.dueDate | niceDate}}
+              {{ task.dueDate | niceDate }}
             </q-item-label>
             <q-item-label caption class="row justify-end">
               <small>{{ task.dueTime }}</small>
@@ -59,18 +59,15 @@
       </div>
 
       <q-dialog v-model="showEditTask">
-        <edit-task 
-        :task="task"
-        :id="id"
-        @close="showEditTask = false" />
+        <edit-task :task="task" :id="id" @close="showEditTask = false" />
       </q-dialog>
     </q-item>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import { date } from 'quasar'
+import { mapActions, mapState } from "vuex";
+import { date } from "quasar";
 
 export default {
   props: ["task", "id"],
@@ -79,6 +76,11 @@ export default {
       showEditTask: false
     };
   },
+
+  computed: {
+    ...mapState('tasks', ['search'])
+  },
+
   methods: {
     ...mapActions("tasks", ["updateTask", "deleteTask"]),
     promptToDelete(id) {
@@ -105,12 +107,23 @@ export default {
   },
 
   components: {
-    "edit-task": require("../Tasks/Modals/EditTask.vue").default,
+    "edit-task": require("../Tasks/Modals/EditTask.vue").default
   },
 
   filters: {
     niceDate(value) {
-      return date.formatDate(value, 'D MMM')
+      return date.formatDate(value, "D MMM");
+    },
+
+    searchHighlight(value, search) {
+      if (search) {
+        let searchRegEx = new RegExp(search, 'ig');
+
+        return value.replace(searchRegEx, (match) => {
+          return '<span class="bg-yellow-6">' + match + '</span>';
+        })
+      }
+      return value;
     }
   }
 };
