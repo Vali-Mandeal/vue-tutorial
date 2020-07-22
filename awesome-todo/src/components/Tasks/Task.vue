@@ -2,6 +2,7 @@
   <div>
     <q-item
       @click="updateTask({ id: id, updates: { completed: !task.completed } })"
+      v-touch-hold:1000.mouse="handleHold"
       clickable
       v-ripple
       :class="!task.completed ? 'bg-orange-1' : 'bg-green-1'"
@@ -94,6 +95,10 @@ export default {
         .onOk(() => {
           this.deleteTask(id);
         });
+    },
+
+    handleHold() {
+      this.showEditTask = true;
     }
   },
 
