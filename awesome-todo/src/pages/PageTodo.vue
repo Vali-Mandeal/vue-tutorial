@@ -1,23 +1,30 @@
 <template>
   <q-page class="q-pa-md">
-
     <div class="row q-mb-lg">
       <search />
-      <sort/>
+      <sort />
     </div>
 
-   <p v-if="search && !Object.keys(tasksTodo).length && !Object.keys(tasksCompleted).length">No search results containing {{search}} have been found.</p>
+    <p
+      v-if="
+        search &&
+          !Object.keys(tasksTodo).length &&
+          !Object.keys(tasksCompleted).length
+      "
+    >
+      No search results containing {{ search }} have been found.
+    </p>
 
-    <no-tasks v-if="!Object.keys(tasksTodo).length && !search" />
+    <div class="relative-position">
+      <no-tasks v-if="!Object.keys(tasksTodo).length && !search" />
 
-    <tasks-todo
-      v-if="Object.keys(tasksTodo).length"
-      :tasksTodo="tasksTodo" />
+      <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo" />
 
-    <tasks-completed
-      v-if="Object.keys(tasksCompleted).length"
-      :tasksCompleted="tasksCompleted"
-    />
+      <tasks-completed
+        v-if="Object.keys(tasksCompleted).length"
+        :tasksCompleted="tasksCompleted"
+      />
+    </div>
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
