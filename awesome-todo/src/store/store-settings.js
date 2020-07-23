@@ -1,3 +1,5 @@
+import { LocalStorage } from "quasar";
+
 const state = {
   settings: {
     show12HourTimeFormat: false,
@@ -15,17 +17,24 @@ const mutations = {
 };
 // async, good for data fetching
 const actions = {
-  setShow12HourTimeFormat({ commit }, value) {
-    commit('setShow12HourTimeFormat', value)
+  // to trigger an action within action use dispatch
+  setShow12HourTimeFormat({ commit, dispatch }, value) {
+    commit("setShow12HourTimeFormat", value);
+    dispatch("saveSettings");
   },
-  setShowTasksInOneList({ commit }, value) {
-    commit('setShowTasksInOneList', value)
+  setShowTasksInOneList({ commit, dispatch }, value) {
+    commit("setShowTasksInOneList", value);
+    dispatch("saveSettings");
+  },
+
+  saveSettings({ state }) {
+    LocalStorage.set("settings", state.settings);
   }
 };
 // get data from the state -> use it in the components
 const getters = {
   settings: state => {
-    return state.settings
+    return state.settings;
   }
 };
 
