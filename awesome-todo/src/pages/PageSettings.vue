@@ -41,12 +41,26 @@
           name="chevron_right"/>
         </q-item-section>
       </q-item>
+
+      <q-item
+        @click="visitOurWebsite"
+        tag="label"
+        v-ripple>
+        <q-item-section>
+          <q-item-label>Visit our website</q-item-label>
+        </q-item-section>
+        <q-item-section side>
+          <q-icon
+          name="chevron_right"/>
+        </q-item-section>
+      </q-item>
     </q-list>
   </q-page>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { openURL } from 'quasar'
 
 export default {
   computed: {
@@ -74,7 +88,11 @@ export default {
     ...mapActions("settings", [
       "setShow12HourTimeFormat",
       "setShowTasksInOneList"
-    ])
+    ]),
+
+    visitOurWebsite() {
+      openURL('http://www.google.com');
+    }
   }
 };
 </script>
