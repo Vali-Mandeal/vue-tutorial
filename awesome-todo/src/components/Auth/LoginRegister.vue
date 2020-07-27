@@ -49,6 +49,7 @@
 
 <script>
 export default {
+  props: ["tab"],
   data() {
     return {
       formData: {
@@ -69,7 +70,12 @@ export default {
       this.$refs.password.validate();
 
       if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
-          console.log('register user');
+          if (this.tab == 'login') {
+            console.log('login');
+          }
+          else {
+            console.log('register user');
+          }
       }
     }
   }
