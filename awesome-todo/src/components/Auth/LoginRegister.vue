@@ -5,7 +5,7 @@
         <template v-slot:avatar>
           <q-icon name="login" color="primary" />
         </template>
-        Register to acces your Todos anywhere!
+        {{ tab | titleCase }} to acces your Todos anywhere!
       </q-banner>
     </div>
 
@@ -18,7 +18,8 @@
         dense
         class="col"
         :rules="[
-          val => isValidEmailAddress(val) || 'Please enter a valid email address'
+          val =>
+            isValidEmailAddress(val) || 'Please enter a valid email address'
         ]"
         lazy-rules
       />
@@ -42,7 +43,7 @@
 
     <div class="row">
       <div class="q-space" />
-      <q-btn color="primary" label="Register" type="submit" />
+      <q-btn color="primary" :label="tab" type="submit" />
     </div>
   </form>
 </template>
@@ -70,13 +71,18 @@ export default {
       this.$refs.password.validate();
 
       if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
-          if (this.tab == 'login') {
-            console.log('login');
-          }
-          else {
-            console.log('register user');
-          }
+        if (this.tab == "login") {
+          console.log("login");
+        } else {
+          console.log("register user");
+        }
       }
+    }
+  },
+
+  filters: {
+    titleCase(value) {
+      return value.charAt(0).toUpperCase() + value.slice(1);
     }
   }
 };
