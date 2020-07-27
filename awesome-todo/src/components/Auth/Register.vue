@@ -13,6 +13,7 @@
       <q-input
         v-model="formData.email"
         label="Email"
+        ref="email"
         stack-label
         dense
         class="col"
@@ -28,6 +29,7 @@
         v-model="formData.password"
         type="password"
         label="Password"
+        ref="password"
         stack-label
         dense
         class="col"
@@ -63,7 +65,12 @@ export default {
     },
 
     submitForm() {
-      console.log("submitForm");
+      this.$refs.email.validate();
+      this.$refs.password.validate();
+
+      if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
+          console.log('register user');
+      }
     }
   }
 };
